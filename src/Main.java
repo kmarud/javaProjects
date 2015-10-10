@@ -5,32 +5,32 @@ public class Main
 {
     public static void menu() throws Exception
     {
-        Scanner odczyt = new Scanner(System.in); //obiekt do odebrania danych od użytkownika
-        System.out.println("Witaj, wpisz adres http:// lub adres do pliku z rozszerzeniem: ");
+        Scanner odczyt = new Scanner(System.in);
+        System.out.println("Witaj, wpisz adres zaczynając od http:// lub adres do pliku z rozszerzeniem: ");
         String address = odczyt.nextLine();
-        boolean temp;
+        boolean wszLink, aktDom;
         System.out.println("Wyswietlic znalezione linki ? y/n ");
         String czyWszystkieLinki = odczyt.nextLine();
+        System.out.println("Tylko z aktualnej domeny? y/n ");
+        String aktualnaDomena = odczyt.nextLine();
         if (czyWszystkieLinki.equals("y"))
-            temp=true;
+            wszLink=true;
         else
-            temp=false;
-        if(address.startsWith("http://"))
-        {
-            WebPageReader czytaczOnline = new WebPageReader();
-            czytaczOnline.read(address, temp);
-           // czytaczOnline.getData();
-        }
-        else
-        {
-            FileReader czytaczPlikow = new FileReader();
-            czytaczPlikow.read(address, temp);
-           // czytaczPlikow.funk();
-        }
-        //String address = odczyt.nextLine();
+            wszLink=false;
 
-        //System.out.println("Witaj "+ imie); //wyświetlamy powitanie
+        if (aktualnaDomena.equals("y"))
+            aktDom=true;
+        else
+            aktDom=false;
+
+        AbstractReader czytacz;
+        if(address.startsWith("http://"))
+            czytacz = new WebPageReader();
+        else
+            czytacz = new FileReader();
+        czytacz.read(address,wszLink,aktDom);                 //POLIMORFIZM
     }
+
     public static void main(String[] args) throws Exception
     {
         menu();

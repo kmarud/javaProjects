@@ -8,35 +8,24 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class WebPageReader extends AbstractReader {
-    public void read(String address, boolean wszystkieLinki) throws Exception{
+    public void read(String address, boolean wszystkieLinki, boolean aktualnaDomena) throws Exception{
         loacalAddress=address;
-        System.out.println("WEb page readeer dzialam");
-        getData();
-    }
-
-    public void getData() throws Exception {
         URL page = new URL(loacalAddress);
-        StringBuffer text = new StringBuffer();
         HttpURLConnection conn = (HttpURLConnection) page.openConnection();
         conn.connect();
         InputStreamReader in = new InputStreamReader((InputStream) conn.getContent(), "UTF-8");
-
         BufferedReader buff = new BufferedReader(in);
-        String zdanie = buff.readLine();
-        StringBuffer adverbs = new StringBuffer();
-        boolean findAdv = false;
-        String regex="a href";
+        zdanie = buff.readLine();
         String zapam="";
         while (zdanie != null)
         {
-
-           // System.out.println(line);
             while (zdanie.contains("a href") && zdanie.contains("</a>"))
             {
                 poczatek = zdanie.indexOf("<a href=");
                 koniec = zdanie.indexOf("</a>");
                 liczbaLinkow++;
-                System.out.println(zdanie.substring(poczatek + 9, koniec));
+                if (wszystkieLinki)
+                    System.out.println(zdanie.substring(poczatek + 9, koniec)); // +9 bo nie wyswietlamy <a href="
                 zdanie = zdanie.replaceFirst("<a href=", "");
                 zdanie = zdanie.replaceFirst("</a>", "");
             }
@@ -51,11 +40,11 @@ public class WebPageReader extends AbstractReader {
                     zapam += zdanie;
                 koniec = zapam.indexOf("</a>");
                 liczbaLinkow++;
-                System.out.println(zapam.substring(poczatek + 9, koniec));
+                if (wszystkieLinki)
+                    System.out.println(zapam.substring(poczatek + 9, koniec));
                 zapam = "";
             }
             zdanie = buff.readLine();
-
         }
         System.out.println("\nliczba wszystkich linkow: " + liczbaLinkow);
     }
