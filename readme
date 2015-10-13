@@ -1,0 +1,2 @@
+Program poprawnie odczytuje linki w jednej linii po znaczku </a> nie ma następnego linka.
+Program przetestowany na stronach http://tomasz.kubik.staff.iiar.pwr.wroc.pl/, http://www.zsk.ict.pwr.wroc.pl/zsk/pracownicy/ oraz na powyższych stronach zapisanych do pliku .htm (z odpowiednim kodowaniem)

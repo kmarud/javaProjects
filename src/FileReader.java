@@ -12,7 +12,8 @@ public class FileReader extends AbstractReader{
         loacalAddress=address;
         System.out.println("Linki w pliku " + loacalAddress + " :\n");
         liczbaLinkow=0;
-        String zapam="", tmp ="";
+        zapam="";
+       // String tmp;
         File file = new File(loacalAddress);
         if (file.exists() == false)
         {
@@ -27,9 +28,16 @@ public class FileReader extends AbstractReader{
             {
                 poczatek = zdanie.indexOf("<a href=");
                 koniec = zdanie.indexOf("</a>");
+                tmp=zdanie.substring(poczatek + 9, koniec);
+                if(tmp.startsWith("http") && aktualnaDomena)
+                {
+                    zdanie = zdanie.replaceFirst("<a href=", "");
+                    zdanie = zdanie.replaceFirst("</a>", "");
+                    continue;
+                }
                 liczbaLinkow++;
                 if (wszystkieLinki)
-                    System.out.println(zdanie.substring(poczatek + 9, koniec));
+                    System.out.println(tmp);
                 zdanie = zdanie.replaceFirst("<a href=", "");
                 zdanie = zdanie.replaceFirst("</a>", "");
             }
@@ -43,9 +51,12 @@ public class FileReader extends AbstractReader{
                 if (!zapam.equals(zdanie))
                     zapam += zdanie;
                 koniec = zapam.indexOf("</a>");
+                tmp =zapam.substring(poczatek + 9, koniec);
+                if(tmp.startsWith("http") && aktualnaDomena)
+                    continue;
                 liczbaLinkow++;
                 if(wszystkieLinki)
-                    System.out.println(zapam.substring(poczatek + 9, koniec));
+                    System.out.println(tmp);
                 zapam = "";
             }
         }

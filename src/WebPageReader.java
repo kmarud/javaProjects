@@ -10,22 +10,33 @@ import java.net.URL;
 public class WebPageReader extends AbstractReader {
     public void read(String address, boolean wszystkieLinki, boolean aktualnaDomena) throws Exception{
         loacalAddress=address;
+        System.out.println("Linki na stronie " + loacalAddress + " :\n");
+        liczbaLinkow=0;
         URL page = new URL(loacalAddress);
         HttpURLConnection conn = (HttpURLConnection) page.openConnection();
         conn.connect();
         InputStreamReader in = new InputStreamReader((InputStream) conn.getContent(), "UTF-8");
         BufferedReader buff = new BufferedReader(in);
-        zdanie = buff.readLine();
-        String zapam="";
-        while (zdanie != null)
+        zapam="";
+        while (true)
         {
+            zdanie = buff.readLine();
+            if(zdanie == null)
+                break;
             while (zdanie.contains("a href") && zdanie.contains("</a>"))
             {
                 poczatek = zdanie.indexOf("<a href=");
                 koniec = zdanie.indexOf("</a>");
+                tmp=zdanie.substring(poczatek + 9, koniec); // +9 bo nie wyswietlamy <a href="
+                if(tmp.startsWith("http") && aktualnaDomena)
+                {
+                    zdanie = zdanie.replaceFirst("<a href=", "");
+                    zdanie = zdanie.replaceFirst("</a>", "");
+                    continue;
+                }
                 liczbaLinkow++;
                 if (wszystkieLinki)
-                    System.out.println(zdanie.substring(poczatek + 9, koniec)); // +9 bo nie wyswietlamy <a href="
+                    System.out.println(tmp);
                 zdanie = zdanie.replaceFirst("<a href=", "");
                 zdanie = zdanie.replaceFirst("</a>", "");
             }
@@ -39,12 +50,14 @@ public class WebPageReader extends AbstractReader {
                 if (!zapam.equals(zdanie))
                     zapam += zdanie;
                 koniec = zapam.indexOf("</a>");
+                tmp =zapam.substring(poczatek + 9, koniec);
+                if(tmp.startsWith("http") && aktualnaDomena)
+                    continue;
                 liczbaLinkow++;
                 if (wszystkieLinki)
-                    System.out.println(zapam.substring(poczatek + 9, koniec));
+                    System.out.println(tmp);
                 zapam = "";
             }
-            zdanie = buff.readLine();
         }
         System.out.println("\nliczba wszystkich linkow: " + liczbaLinkow);
     }
