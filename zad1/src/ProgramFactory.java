@@ -1,8 +1,5 @@
 import java.util.Scanner;
 
-/**
- * Created by kamil on 19.10.15.
- */
 public class ProgramFactory {
     public void run() throws Exception{
         Scanner scannerObject = new Scanner(System.in);

@@ -1,6 +1,4 @@
-/**
- * Created by kamil on 07.10.15.
- */
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,7 +17,6 @@ public class WebPageReader extends AbstractReader {
         conn.connect();
         InputStreamReader in = new InputStreamReader((InputStream) conn.getContent(), "UTF-8");
         BufferedReader buff = new BufferedReader(in);
-        zapam="";
         while (true)
         {
             zdanie = buff.readLine();

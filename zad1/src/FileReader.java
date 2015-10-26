@@ -1,6 +1,3 @@
-/**
- * Created by kamil on 07.10.15.
- */
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,7 +11,6 @@ public class FileReader extends AbstractReader{
         currentDomain = aktualnaDomena;
         System.out.println("Linki w pliku " + loacalAddress + " :\n");
         numberOfLinks=0;
-        zapam="";
         File file = new File(loacalAddress);
         if (file.exists() == false)
         {
