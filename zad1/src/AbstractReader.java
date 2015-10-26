@@ -2,12 +2,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public abstract class AbstractReader {
-    protected String zdanie;
+    protected String word;
     protected String loacalAddress;
     protected int numberOfLinks;
     protected boolean allLinks, currentDomain;
 
-    public abstract void read(String address, boolean allLin, boolean aktualnaDomena) throws Exception;
+    public abstract void read(String address, boolean showAllLinks, boolean onlyCurrentDomain) throws Exception;
 
     protected void analyze(String word)
     {

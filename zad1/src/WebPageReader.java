@@ -6,10 +6,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class WebPageReader extends AbstractReader {
-    public void read(String address, boolean allLin, boolean aktualnaDomena) throws Exception{
+    public void read(String address, boolean showAllLinks, boolean onlyCurrentDomain) throws Exception{
         loacalAddress=address;
-        allLinks = allLin;
-        currentDomain = aktualnaDomena;
+        allLinks = showAllLinks;
+        currentDomain = onlyCurrentDomain;
         System.out.println("Linki na stronie " + loacalAddress + " :\n");
         numberOfLinks=0;
         URL page = new URL(loacalAddress);
@@ -19,10 +19,10 @@ public class WebPageReader extends AbstractReader {
         BufferedReader buff = new BufferedReader(in);
         while (true)
         {
-            zdanie = buff.readLine();
-            if(zdanie == null)
+            word = buff.readLine();
+            if(word == null)
                 break;
-            analyze(zdanie);
+            analyze(word);
         }
         System.out.println("\nliczba wszystkich linkow: " + numberOfLinks);
     }

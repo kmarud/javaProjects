@@ -4,11 +4,11 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class FileReader extends AbstractReader{
-    public void read(String address, boolean allLin, boolean aktualnaDomena)throws FileNotFoundException
+    public void read(String address, boolean showAllLinks, boolean onlyCurrentDomain)throws FileNotFoundException
     {
         loacalAddress=address;
-        allLinks = allLin;
-        currentDomain = aktualnaDomena;
+        allLinks = showAllLinks;
+        currentDomain = onlyCurrentDomain;
         System.out.println("Linki w pliku " + loacalAddress + " :\n");
         numberOfLinks=0;
         File file = new File(loacalAddress);
@@ -20,8 +20,8 @@ public class FileReader extends AbstractReader{
         Scanner in = new Scanner(file);
         while (in.hasNextLine() == true)
         {
-            zdanie = in.nextLine();
-            analyze(zdanie);
+            word = in.nextLine();
+            analyze(word);
         }
         System.out.println("\nliczba wszystkich linkow: " + numberOfLinks);
     }
