@@ -1,35 +1,30 @@
-/**
- * Created by kamil on 11.11.15.
- */
-
-import java.util.LinkedList;
 
 public class LifoQueue<T> extends AbstractQueue<T>{
 
-    public LifoQueue() {
-        XXX = new LinkedList<obiekt>();
-    }
-    public void add(T ddd, ENN.priority cos)
+    /*public LifoQueue() {
+        myList = new LinkedList<>();
+    }*/
+    public void add(T parameterData, MYQUEUE.priority parameterPriority)
     {
-        abc = new obiekt<>();
-        abc.dane=ddd;
-        abc.prior= cos;
-        XXX.addLast(abc);
+        myObiect = new object<>();
+        myObiect.data=parameterData;
+        myObiect.priority= parameterPriority;
+        myObiect.id=counter++;
+        myList.addLast(myObiect);
     }
-    public obiekt get()
+    /*public object get()
     {
-        //T obiect;
         try {
-            obiekt obiect = XXX.getLast();
-            XXX.removeLast();
-            return obiect;
+            object temp = myList.getLast();
+            myList.removeLast();
+            return temp;
 
         }catch (java.util.NoSuchElementException e) {
-            System.out.println("blad !");
-            obiekt obiect = new obiekt();
-            obiect.dane="";
-            obiect.prior=ENN.priority.LOW;
-            return obiect;
+            System.out.println("Blad, kolejka pusta !");
+            object temp = new object();
+            temp.data="";
+            temp.priority=MYQUEUE.priority.LOW;
+            return temp;
         }
-    }
+    }*/
 }

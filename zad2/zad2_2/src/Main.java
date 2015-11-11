@@ -3,27 +3,25 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //LIFOqueue<"String"> listLifo = new LIFOqueue<String>();
         LifoQueue<String> myLifo= new LifoQueue<>();
-        //LinkedList<String> lista = new LinkedList<String>();
-        //myLifo.add("1", 2);
-       // myLifo.add("witam", LifoQueue.priority.NORMAL);
-       // myLifo.add("123", LifoQueue.priority.LOW);
-        //myLifo.add("zegnam !", 2);
-        //myLifo.add(3, 2);
+        FifoQueue<Integer> myFifo = new FifoQueue<>();
 
-        myLifo.add("kamil", ENN.priority.LOW);
-        myLifo.add("Ola", ENN.priority.URGENT);
-        //obiekt <String> obiekcik =myLifo.get();
-        //System.out.println(obiekcik.priority);
-        //obiekcik =myLifo.get();
-        obiekt sadasdas= myLifo.get();
-        System.out.print(sadasdas.dane+ " ");
-        System.out.println(sadasdas.prior);
-        /*System.out.println(myLifo.get());
-        System.out.println(myLifo.get());
-        System.out.println(myLifo.get());
-        System.out.println(myLifo.get());*/
-            //System.out.println("Blad !");
+        myLifo.add("kamil", MYQUEUE.priority.LOW);
+        myLifo.add("Ola", MYQUEUE.priority.URGENT);
+        myLifo.add("imie", MYQUEUE.priority.LOW);
+
+       // System.out.println(myLifo.get().data);
+        //System.out.println(myLifo.get().data);
+
+
+
+        myFifo.add(1, MYQUEUE.priority.LOW);
+        myFifo.add(2, MYQUEUE.priority.NORMAL);
+        myFifo.add(3, MYQUEUE.priority.URGENT);
+
+        System.out.println(myFifo.get().data);
+        System.out.println(myLifo.get().id);
+        //System.out.println(myFifo.get().data);
+        //System.out.println(myFifo.get().data);
     }
 }

@@ -1,33 +1,30 @@
-/**
- * Created by kamil on 11.11.15
- *
- *
- * FIFO JESZCZE Nie skonczona
- */
-import java.util.LinkedList;
 
-public class FifoQueue<T> {
-    LinkedList<T> XXX;
-    public FifoQueue() {
-        XXX = new LinkedList<T>();
-    }
-    public void add(T obiect, int priority)
+public class FifoQueue<T> extends AbstractQueue<T>{
+
+    /*public LifoQueue() {
+        myList = new LinkedList<>();
+    }*/
+    public void add(T parameterData, MYQUEUE.priority parameterPriority)
     {
-        XXX.addFirst(obiect);
+        myObiect = new object<>();
+        myObiect.data=parameterData;
+        myObiect.priority= parameterPriority;
+        myObiect.id=counter++;
+        myList.addFirst(myObiect);
     }
-    public T get()
+    /*public object get()
     {
-        //T obiect;
         try {
-            T obiect = XXX.getLast();
-            XXX.removeLast();
-            return obiect;
+            object temp = myList.getLast();
+            myList.removeLast();
+            return temp;
 
         }catch (java.util.NoSuchElementException e) {
-            return (T)"Blad, kolejka pusta !";
-            //return null;
+            System.out.println("Blad, kolejka pusta !");
+            object temp = new object();
+            temp.data="";
+            temp.priority=MYQUEUE.priority.LOW;
+            return temp;
         }
-        //return XXX.pop();
-        //return obiect;
-    }
+    }*/
 }
