@@ -1,5 +1,6 @@
 
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 class MYQUEUE {
     enum priority {URGENT, NORMAL, LOW}
@@ -11,31 +12,30 @@ class object <T>{
 }
 
 
-public abstract class AbstractQueue<T> {
+abstract class AbstractQueue<T> {
     LinkedList<object> myList;
     object<T> myObiect;
-    int counter = 0;
+    int idCounter = 0;
     public AbstractQueue() {
         myList = new LinkedList<>();
     }
 
-    public abstract void add(T ddd, MYQUEUE.priority cos);
+    public abstract void add(T parameterData, MYQUEUE.priority parameterPriority);
 
-    public object get()
+    public object get() throws NoSuchElementException
     {
-        try {
+       // try {
             object temp = myList.getLast();
             myList.removeLast();
             return temp;
-
-        }catch (java.util.NoSuchElementException e) {
-            System.out.println("Blad, kolejka pusta !");
+       /* }catch (java.util.NoSuchElementException e) {
+            System.err.print("Blad, kolejka pusta ! ");
             object temp = new object();
             temp.data="";
             temp.priority=MYQUEUE.priority.LOW;
             temp.id=-1;
             return temp;
-        }
+        }*/
     }
 
 }

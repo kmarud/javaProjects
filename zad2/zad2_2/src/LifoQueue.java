@@ -1,15 +1,12 @@
 
-public class LifoQueue<T> extends AbstractQueue<T>{
+class LifoQueue<T> extends AbstractQueue<T>{
 
-    /*public LifoQueue() {
-        myList = new LinkedList<>();
-    }*/
     public void add(T parameterData, MYQUEUE.priority parameterPriority)
     {
         myObiect = new object<>();
         myObiect.data=parameterData;
         myObiect.priority= parameterPriority;
-        myObiect.id=counter++;
+        myObiect.id=idCounter++;
         myList.addLast(myObiect);
     }
     /*public object get()
