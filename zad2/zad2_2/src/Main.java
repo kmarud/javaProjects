@@ -1,9 +1,9 @@
-import java.util.LinkedList;
 
 public class Main {
 
     public static void main(String[] args) {
         ProgramFactory mainProgram = new ProgramFactory();
-        mainProgram.test();
+        mainProgram.preparedTest();
+        //mainProgram.interactiveTest();                     // uncomment to run test method
     }
 }

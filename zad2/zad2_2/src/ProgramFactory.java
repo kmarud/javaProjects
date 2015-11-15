@@ -2,7 +2,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class ProgramFactory {
-    void test() {
+    void preparedTest() {                           //metoda testowa
         LifoQueue<String> myLifo = new LifoQueue<>();
 
         myLifo.add("To", MYQUEUE.priority.LOW);
@@ -20,7 +20,7 @@ public class ProgramFactory {
             System.out.println(myLifo.get().data);
         }catch (NoSuchElementException e)
         {
-            System.out.println("\tBlad, kolejka pusta !\n");
+            System.out.println("\tKolejka pusta !\n");
         }
 
         FifoQueue<Integer> myFifo = new FifoQueue<>();
@@ -32,37 +32,54 @@ public class ProgramFactory {
         while(true) {
             try {
                 object temp = myFifo.get();
-                System.out.println("dane=" + temp.data + " priorytet=" + temp.priority + " id=" + temp.id);
+                System.out.println("dane=" + temp.data + "\tpriorytet=" + temp.priority + "\tid=" + temp.id);
             }catch (NoSuchElementException e) {break;}
         }
     }
 
-    void mojTest() {
-        AbstractQueue<String> myQueue;
+    void interactiveTest() {
+        AbstractQueue myQueue;
+        Scanner reader = new Scanner(System.in);
+
         System.out.println("Ktorej kolejki chcesz uzyc ?");
         System.out.println("1 - LIFO (stos)");
         System.out.println("2 - FIFO (kolejka)");
-
-        Scanner reader = new Scanner(System.in); //obiekt do odebrania danych od użytkownika
-        String input = reader.next();
-        if (input.equals("1"))
-            myQueue = new LifoQueue<>();
-        else if (input.equals("2"))
-            myQueue = new FifoQueue<>();
+        String inputQueueType = reader.next();
+        if(inputQueueType.equals("1"))
+            myQueue = new LifoQueue<String>();
+        else if (inputQueueType.equals("2"))
+            myQueue = new FifoQueue<String>();
         else
             return;
 
-        System.out.println("1 - dodaj element");
-        System.out.println("2 - pobierz element");
-        input = reader.next();
-        if (input.equals("1"))
-        {
-            System.out.println("Wpisz dane:");
-           // myQueue.add();
+        while(true) {
+            System.out.println("1 - dodaj element");
+            System.out.println("2 - pobierz element");
+            System.out.println("3 - wyjscie");
+            String inputOperation = reader.next();
+            if (inputOperation.equals("1")) {
+                System.out.println("Wpisz dane:");
+                String inputData = reader.next();
+                System.out.println("Priorytet: \n1 - LOW \n2 - NORMAL \n3 - URGNET");
+                String inputPriority = reader.next();
+                if (inputPriority.equals("1"))
+                    myQueue.add(inputData, MYQUEUE.priority.LOW);
+                else if (inputPriority.equals("2"))
+                    myQueue.add(inputData, MYQUEUE.priority.NORMAL);
+                else if (inputPriority.equals("3"))
+                    myQueue.add(inputData, MYQUEUE.priority.URGENT);
+                else
+                    break;
+            } else if (inputOperation.equals("2")) {
+                try {
+                    object temp = myQueue.get();
+                    System.out.println("\tdane=" + temp.data + "\tpriorytet=" + temp.priority + "\tid=" + temp.id + "\n");
+                } catch (NoSuchElementException e) {
+                    System.out.println("\tKolejka pusta !\n");
+                }
+            }
+            else
+                break;
         }
-        else if (input.equals("2"))
-            myQueue = new FifoQueue<>();
-        else
-            return;
     }
 }
