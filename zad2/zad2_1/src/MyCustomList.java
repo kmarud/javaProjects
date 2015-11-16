@@ -1,16 +1,5 @@
 import java.util.Arrays;
 
-/**
- * Created by kamil on 20.10.15.
- * lista:
- 1.add OK
- 2.remove OK
- 3.removeIndex OK
- 4.size OK
- 5.get OK
- 6.findFirst OK
- 7.replace
- */
 public class MyCustomList<T> {
 
     private T[] table, tempTable;
