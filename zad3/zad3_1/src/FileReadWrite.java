@@ -1,81 +1,81 @@
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Scanner;
 
 
 public class FileReadWrite {
-    String filename;
-    String outputFilename;
-    String errorsFilename;
+    String filename, outputFilename, errorsFilename;
     int rowsPerFile;
-    File fileHandle = new File("properties.txt");
-    private HashSet<User> zbior = new HashSet<>();
+    File fileProperties = new File("properties.txt");
+
+    private HashSet<User> userCollection = new HashSet<>();
+    private ArrayList<User> illegalUserCollection = new ArrayList<>();
+
     FileReadWrite() {
         try {
-            Scanner skaner = new Scanner(fileHandle);
+            Scanner skaner = new Scanner(fileProperties);
             filename = skaner.nextLine().split("=")[1];
-            //System.out.println(filename);
             outputFilename = skaner.nextLine().split("=")[1];
             errorsFilename = skaner.nextLine().split("=")[1];
-            rowsPerFile = 123;//skaner.nextLine().split("=")[1];
-        }catch(FileNotFoundException e)
-        {
-            System.out.println("brak pliku properties");
+            rowsPerFile = Integer.parseInt(skaner.nextLine().split("=")[1]);
+        } catch(FileNotFoundException e) {
+            System.out.println("brak pliku properties !");
         }
     }
     void read()
     {
-        File plikDane = new File(filename);
+        File fileData = new File(filename);
         try {
-            Scanner skaner = new Scanner(plikDane);
-            skaner.nextLine();
-            while (skaner.hasNextLine()) {
-                String temp = skaner.nextLine();
-                String[] parts = temp.split(",");
+            Scanner dataScanner = new Scanner(fileData);
+            dataScanner.nextLine();
+            while (dataScanner.hasNextLine()) {
+                String[] parts = dataScanner.nextLine().split(",");
                 try {
-                    User newPerson = new User(Long.parseLong(parts[0]), parts[1], PHONE_OPERATOR.valueOf(parts[2]), parts[3]);
-                    zbior.add(newPerson);
-                }catch (IllegalArgumentException e)
-                {
-                    System.err.println("error");
+                    User newPerson = new User(Long.parseLong(parts[0]), parts[1], User.PHONE_OPERATOR.valueOf(parts[2]), parts[3]);
+                    if(parts[3].length()!=9)
+                        throw new IllegalArgumentException();
+                    userCollection.add(newPerson);
+                } catch (IllegalArgumentException e) {
+                    User newPerson = new User(Long.parseLong(parts[0]), parts[1], User.PHONE_OPERATOR.Other, parts[3]);
+                    illegalUserCollection.add(newPerson);
                 }
-                    /* newPerson.id=parts[0];
-                newPerson.name=parts[1];
-                newPerson.phone_operator=parts[2];
-                newPerson.phone_number=parts[3];*/
-
-
-                //String part1 = parts[0]; // 004
-                //String part2 = parts[1]; // 034556
-                //analyze(skaner.nextLine());
-                //odczyt = odczyt + skaner.nextLine() + "\n";
             }
-
         } catch (FileNotFoundException e) {
             System.out.println("Brak Pliku do odczytania!");
         }
-
-        for (User ciagZnakow : zbior) {
-            ciagZnakow.przedstawSie();
-        }
-        System.out.println("\nsize: " + zbior.size());
     }
 
     void write()
     {
-
         try {
-            PrintWriter out = new PrintWriter(outputFilename);
-            for (User ciagZnakow : zbior) {
-                //System.out.println(ciagZnakow.returnData());
-                out.println(ciagZnakow.returnData());
-
+            PrintWriter outIllegal = new PrintWriter(errorsFilename + ".csv");
+            Iterator<User> kamil = userCollection.iterator();
+            PrintWriter out;
+            for(int i=1; i<=Math.ceil(userCollection.size() / (double)rowsPerFile);i++) {
+                if(i==Math.ceil(userCollection.size() / (double)rowsPerFile)) {
+                     out = new PrintWriter(outputFilename + "_" + (userCollection.size() - ((i - 1) * rowsPerFile)) + "_" + i + ".csv");
+                }else {
+                    out = new PrintWriter(outputFilename + "_" + rowsPerFile + "_" + i + ".csv");
+                }
+                for (int j=0;j<rowsPerFile;j++) {
+                    if(kamil.hasNext())
+                        out.println(kamil.next().returnData());
+                }
+                out.close();
             }
-            out.close();
-        }catch(FileNotFoundException e)
-        {}
+            for (User ciagZnakow : illegalUserCollection) {
+                outIllegal.println(ciagZnakow.returnData());
+            }
 
+            outIllegal.close();
+        } catch(FileNotFoundException e)
+        {
+            System.err.print("nie dziala");
+        }
     }
 }

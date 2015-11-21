@@ -1,7 +1,7 @@
-enum PHONE_OPERATOR{Play,Tmobile,Plus}
+
 
 public class User {
-
+    enum PHONE_OPERATOR{Play,Tmobile,Plus,Other}
     private Long id;
     private String name;
     private PHONE_OPERATOR operator;
@@ -17,7 +17,7 @@ public class User {
     {
         System.out.println(this.id + " " + this.name + " " + this.number);
     }
-    String returnData(){
+    public String returnData(){
         String temp = this.id + "," + this.name + "," + this.operator + "," + this.number;
         return temp;
     }
