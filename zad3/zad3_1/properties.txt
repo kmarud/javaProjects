@@ -1,4 +1,4 @@
-filename=proba1.csv
-outputFilename=proceed
+filename=test.csv
+outputFilename=out
 errorsFilename=errors
-rowsPerFile=100
+rowsPerFile=2000

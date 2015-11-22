@@ -1,7 +1,6 @@
 
-
 public class User {
-    enum PHONE_OPERATOR{Play,Tmobile,Plus,Other}
+    public enum PHONE_OPERATOR{Play,Tmobile,Plus,Heyah,Other,BAD_OPERATOR}
     private Long id;
     private String name;
     private PHONE_OPERATOR operator;
@@ -12,10 +11,6 @@ public class User {
         this.name = name;
         this.number=number;
         this.operator=operator;
-    }
-    public void przedstawSie()
-    {
-        System.out.println(this.id + " " + this.name + " " + this.number);
     }
     public String returnData(){
         String temp = this.id + "," + this.name + "," + this.operator + "," + this.number;
