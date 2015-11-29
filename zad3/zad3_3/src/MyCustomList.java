@@ -15,15 +15,15 @@ public class MyCustomList<T> {
 
     public T get(int paramIndex)
     {
-        if(paramIndex<table.length)
+        if(paramIndex<table.length && paramIndex >=0)
             return table[paramIndex];
         else
             return null;
     }
 
-    public void remove(T param) throws IllegalArgumentException{
+    public void remove(T param) throws ArrayIndexOutOfBoundsException{
         if(table.length == 0)
-            throw new IllegalArgumentException("tablica pusta!");
+            throw new ArrayIndexOutOfBoundsException("tablica pusta!");
         tempTable = (T[])new Object[table.length];
         int j=0;
         for (int i=0; i< table.length; ++i)
@@ -36,10 +36,12 @@ public class MyCustomList<T> {
         }
         table=Arrays.copyOf(tempTable, j);
     }
-    public void removeIndex(int param)throws IllegalArgumentException
+    public void removeIndex(int param)throws ArrayIndexOutOfBoundsException
     {
         if(table.length == 0)
-            throw new IllegalArgumentException("tablica pusta!");
+            throw new ArrayIndexOutOfBoundsException("tablica pusta");
+        if(param >= table.length)
+            throw new ArrayIndexOutOfBoundsException("indeks poza tablica");
         tempTable = (T[])new Object[table.length];
         int j=0;
         for (int i=0; i< table.length; ++i)
