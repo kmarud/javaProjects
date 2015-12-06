@@ -13,13 +13,15 @@ public class User {
         this.operator=operator;
     }
     public String returnData(){
-        String temp = this.id + "," + this.name + "," + this.operator + "," + this.number;
-        return temp;
+        return this.id + "," + this.name + "," + this.operator + "," + this.number;
     }
+
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id.equals(user.id);
+        return !(id != null ? !id.equals(user.id) : user.id != null);
     }
 
     @Override

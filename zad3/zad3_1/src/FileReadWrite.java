@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.*;
 
-
 public class FileReadWrite {
     private String filename, outputFilename, errorsFilename;
     private int rowsPerFile;
@@ -26,6 +25,11 @@ public class FileReadWrite {
     }
     public void verifyNumber(String number) throws badPhoneNumber
     {
+        try {
+            Long.parseLong(number);
+        }catch (NumberFormatException e){
+            throw new badPhoneNumber();
+        }
         if(number.length()!=9)
             throw new badPhoneNumber();
     }
