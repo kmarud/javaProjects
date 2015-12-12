@@ -14,8 +14,7 @@ public class ManageQuestions {
     }
     public void readFromFile() throws FileNotFoundException {
         File file = new File("pytania.txt");
-        Scanner scanner = null;
-        scanner = new Scanner(file);
+        Scanner scanner = new Scanner(file);
         while(scanner.hasNext())
             listOfQuestions.add(new Question(scanner.nextLine()));
     }
