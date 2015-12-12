@@ -3,6 +3,7 @@ public class Question{
     // private static int questionCount = 0;
     private String questionContents;
     private boolean answer;
+    private int showNumber;
     public Question(String input){
         //id = questionCount++;
 
@@ -12,6 +13,7 @@ public class Question{
         //or  answer=(temp[1].equals("TAK"))? true : false);
     }
     public String getQuestionContents() {
+        showNumber++;
         return questionContents;
     }
     public boolean validateAnswer(boolean clickedYes){
@@ -19,4 +21,5 @@ public class Question{
             return true;
         return false;
     }
+    public int getShowNumber(){return showNumber;}
 }

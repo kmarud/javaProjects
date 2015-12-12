@@ -12,7 +12,8 @@ public class GuiForm extends JFrame{
     private JButton NextButton;
     private JProgressBar CorrectBar;
     private JTextField CorrectAnswerCount;
-    private JTextField CorrectAnswePercent;
+    private JTextField CorrectAnswerPercent;
+    private JTextField showsNumber;
     private int validCount=0,invalidCount=0;
     ManageQuestions manager = new ManageQuestions();
 
@@ -31,18 +32,20 @@ public class GuiForm extends JFrame{
         }
         manager.randomNewQuestion();
         QuestionContents.setText(manager.getActualQuestionContents());
-        YesButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                if(manager.checkActualQuestion(true)) {
-                    YesButton.setBackground(Color.GREEN);
-                    validCount++;
-                } else{
-                    YesButton.setBackground(Color.RED);
-                    invalidCount++;
-                }
-                    lockButtons();
+        showsNumber.setText("0");
+        buttonHandling();
+    }
+    void buttonHandling(){
+
+        YesButton.addActionListener(actionEvent -> {
+            if(manager.checkActualQuestion(true)) {
+                YesButton.setBackground(Color.GREEN);
+                validCount++;
+            } else{
+                YesButton.setBackground(Color.RED);
+                invalidCount++;
             }
+            lockButtons();
         });
         NoButton.addActionListener(new ActionListener() {
             @Override
@@ -63,13 +66,13 @@ public class GuiForm extends JFrame{
                 YesButton.setBackground(Color.LIGHT_GRAY);
                 NoButton.setBackground(Color.LIGHT_GRAY);
                 manager.randomNewQuestion();
+                showsNumber.setText(Integer.toString(manager.getShowNumber()));
                 QuestionContents.setText(manager.getActualQuestionContents());
                 YesButton.setEnabled(true);
                 NoButton.setEnabled(true);
             }
         });
     }
-
     void lockButtons(){
         YesButton.setEnabled(false);
         NoButton.setEnabled(false);
@@ -78,6 +81,6 @@ public class GuiForm extends JFrame{
         CorrectAnswerCount.setText(Integer.toString(validCount));
         int p = (validCount * 100) / (validCount + invalidCount);
         CorrectBar.setValue(p);
-        CorrectAnswePercent.setText(Integer.toString(p));
+        CorrectAnswerPercent.setText(Integer.toString(p));
     }
 }

@@ -28,4 +28,7 @@ public class ManageQuestions {
     public boolean checkActualQuestion(boolean clickedYes){
         return actualQuestion.validateAnswer(clickedYes);
     }
+    public int getShowNumber(){
+        return actualQuestion.getShowNumber();
+    }
 }
