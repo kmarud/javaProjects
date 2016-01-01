@@ -1,0 +1,3 @@
+Czy Ola to ryba?, TAK
+Czy Ola ma wielkie stopy?, NIE
+Czy ryby to ssaki?, NIE
