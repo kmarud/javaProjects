@@ -13,6 +13,7 @@ public class GuiForm extends JFrame{
     private JProgressBar CorrectBar;
     private JTextField CorrectAnswerCount;
     private JTextField CorrectAnswerPercent;
+    private JTextField InvalidAnswerCount;
     private JTextField showsNumber;
     private int validCount=0,invalidCount=0;
     ManageQuestions manager = new ManageQuestions();
@@ -79,6 +80,7 @@ public class GuiForm extends JFrame{
         CorrectBar.setBackground(Color.RED);
         CorrectBar.setForeground(Color.GREEN);
         CorrectAnswerCount.setText(Integer.toString(validCount));
+        InvalidAnswerCount.setText(Integer.toString(invalidCount));
         int p = (validCount * 100) / (validCount + invalidCount);
         CorrectBar.setValue(p);
         CorrectAnswerPercent.setText(Integer.toString(p));

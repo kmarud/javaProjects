@@ -1,3 +1,7 @@
-Czy Ola to ryba?, TAK
-Czy Ola ma wielkie stopy?, NIE
-Czy ryby to ssaki?, NIE
+Puma jest najszybszym zwięrzęciem lądowym, NIE
+Orka jest drapieżnikiem, TAK
+Wilk należy do gatunku kotowatych, NIE
+Delfin jest ssakiem, TAK
+Żyrafa jest żółto-brązowa, TAK
+Gołębie odlatują do ciepłych krajów na zimę, NIE
+Królik to dziki zając, NIE
