@@ -13,14 +13,13 @@ public class DropboxAutorization {
         DbxRequestConfig config = new DbxRequestConfig(
                 "JavaTutorial/1.0", Locale.getDefault().toString());
 
-        String accessToken = "XoxwrQlUvJIAAAAAAAAAvxcxsaNjRTdWVb4QM9l6jjds3IdkhmmOWGWxRAPnW2D1";
-
-        client = new DbxClient(config, accessToken);
+        client = new DbxClient(config, PropertiesReader.accessToken);
 
         try {
             System.out.println("Połączono z kontem: " + client.getAccountInfo().displayName);
         } catch (DbxException e) {
             System.out.println("Błąd połączenia z kontem! ");
+            System.exit(0);
         }
     }
 }

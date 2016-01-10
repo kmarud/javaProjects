@@ -1,0 +1,4 @@
+FolderToWatch=test
+ThreadPool=6
+AccessToken=XoxwrQlUvJIAAAAAAAAAvxcxsaNjRTdWVb4QM9l6jjds3IdkhmmOWGWxRAPnW2D1
+SecondBetweenStatisticWriting=10

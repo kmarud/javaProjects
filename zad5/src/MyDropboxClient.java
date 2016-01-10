@@ -11,10 +11,10 @@ import java.util.concurrent.Executors;
 
 public class MyDropboxClient {
 
-    ExecutorService executor = Executors.newFixedThreadPool(5);
+    ExecutorService executor = Executors.newFixedThreadPool(PropertiesReader.threadPool);
 
     public void getDirectoryToWatch(){
-        File dir = new File("test");
+        File dir = new File(PropertiesReader.folderToWatch);
         watchDirectoryPath(dir.toPath());
     }
 
@@ -33,6 +33,8 @@ public class MyDropboxClient {
 
         System.out.println("Obserwowany katalog: " + path);
 
+        executor.submit(new StatisticThread());
+
         FileSystem fs = path.getFileSystem();
 
         try (WatchService service = fs.newWatchService()) {
@@ -40,6 +42,7 @@ public class MyDropboxClient {
             path.register(service, ENTRY_CREATE);
 
             WatchKey key;
+
             while (true) {
                 key = service.take();
 
@@ -51,10 +54,8 @@ public class MyDropboxClient {
                         continue; // loop
 
                     } else if (kind == ENTRY_CREATE) {
-                        Path newPath = ((WatchEvent<Path>) watchEvent)
-                                .context();
-                        //Path pathe = FileSystems.getDefault().getPath("test", newPath.toString());
-                        // Output
+                        Path newPath = ((WatchEvent<Path>) watchEvent).context();
+
                         executor.submit(new SendFileThread(newPath.toString(), DropboxAutorization.client));//, executor));
                         System.out.println("Rozpoczęto przesyłanie pliku: " + newPath);
 
@@ -67,8 +68,9 @@ public class MyDropboxClient {
 
         } catch (Exception ioe) {
             System.out.println("cos poszlo nie tak");
+        }finally {
+            System.out.println("asd");
         }
-
     }
 }
 
